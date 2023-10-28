@@ -29,17 +29,24 @@ bool CheckCorrectParameters(const int argc, char *argv[], const int kCorrectNumb
 }
 
 int DecimalToBinary(int number) {
-  
+  int rest{0}, binary{0}, increment{1};
+  while (number != 0) {
+    rest = number % 2;
+    binary += rest * increment;
+    increment *= 10;
+    number /= 2;
+  }
+  return binary;
 }
 
 int main(int argc, char* argv[]) {
   PrintProgramPurpose();
-  if (!CheckCorrectParameters(argc, argv, 3)) {
+  if (!CheckCorrectParameters(argc, argv, 2)) {
     return 345;
   }
   std::cout << "Everything is fine!. Lets continue with the normal execution..."
   << std::endl << std::endl;
   int number = atoi(argv[1]);
-  std::cout << BinaryToDecimal(number) << std::endl;
+  std::cout << DecimalToBinary(number) << std::endl;
   return 0;
 }
